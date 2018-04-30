@@ -1,4 +1,4 @@
-# Community World
+#  Fabrication Collective
 An empty world that is populated by the people in it. You have a choice if you want to be a tree, time of day or weather, as others join the world it becomes populated with trees, clouds and time of day. It can be viewed at https://limitless-savannah-41124.herokuapp.com/
 
 ### how to play
