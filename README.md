@@ -11,12 +11,10 @@ It uses A-Frame, Node.js, Socket.io
 download and run npm install 
 
 ### To do
-* create components for the javascript
 * make more random position for trees but so they don't intersect or cover the menu
 * add more elements you can be such as birds, animals, rain
 * add more interaction when certain things are picked. At the moment if you pick day and night you get dawn. Maybe sun and rain would produce a rainbow
 * create sounds and music for the elements
-* put each element into a component, maybe use react
 * optimize code
 * optimize images and objects
 * change the lighting depending on what's picked
