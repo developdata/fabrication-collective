@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="refresh" content="600" />
+   <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+   <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.4/dist/aframe-extras.min.js"></script>
+
+   <script src="components/color.js"></script>
+   <script src="components/listen.js"></script>
+   <script src="components/imgboolean.js"></script>
+   <script src="components/imglistener.js"></script>
+   <script src="components/moves.js"></script>
+   <script src="components/automove.js"></script>
+
+   <style>
+        .hideit{
+            display: none;
+        }
+
+        .stuff{
+            background-color: #19250D;
+        }
+   </style>
+</head>
+<body>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+
+    <a-scene image-boolean>
+
+    <a-assets>
+        <img id="tree1" src="images/tree1.png"></img>
+        <img id="tree2" src="images/tree2.png"></img>
+        <img id="tree3" src="images/tree3.png"></img>
+        <img id="day1" src="images/sun.png"></img>
+        <img id="day2" src="images/moon.png"></img>
+        <img id="weather1" src="images/cloud_light.png"></img>
+        <img id="weather2" src="images/cloud_gray.png"></img>
+ 
+        <img id="day1-img" src="images/time_day.jpg"></img>
+        <img id="day2-img" src="images/time_night.jpg"></img>
+        <img id="day3-img" src="images/time_dawn.jpg"></img>
+        <img id="daynone-img" src="images/time_none.jpg"></img>
+
+        <img id="ground-img" src="images/test.jpg"></img>
+        
+        <a-asset-item id="tree1-obj" src="objects/tree1.obj"></a-asset-item>
+        <a-asset-item id="tree1-mtl" src="objects/tree1.mtl"></a-asset-item>
+        <a-asset-item id="tree2-obj" src="objects/tree2.obj"></a-asset-item>
+        <a-asset-item id="tree2-mtl" src="objects/tree2.mtl"></a-asset-item>
+        <a-asset-item id="tree3-obj" src="objects/tree3.obj"></a-asset-item>
+        <a-asset-item id="tree3-mtl" src="objects/tree3.mtl"></a-asset-item>
+
+        <a-asset-item id="weather1-obj" src="objects/cloud_light.obj"></a-asset-item>
+        <a-asset-item id="weather1-mtl" src="objects/cloud_light.mtl"></a-asset-item>
+        <a-asset-item id="weather2-obj" src="objects/cloud_dark.obj"></a-asset-item>
+        <a-asset-item id="weather2-mtl" src="objects/cloud_dark.mtl"></a-asset-item>
+        <a-asset-item id="weather3-obj" src="objects/weather3.obj"></a-asset-item>
+        <a-asset-item id="weather3-mtl" src="objects/weather3.mtl"></a-asset-item>
+
+    </a-assets>
+
+    <a-entity id="player" automove-controls camera universal-controls="movementControls: keyboard" kinematic-body position="0 1.8 0">
+        <a-light color="#fff" distance="10" intensity="1" type="point"></a-light>
+        <a-entity cursor="fuse: true; fuseTimeout: 1000"
+            id="maincursor"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: white; shader: flat">
+        </a-entity>
+    </a-entity>
+
+    <a-entity light="type: ambient; color: #BBB"></a-entity>
+    <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="1 1.768 1"></a-entity>
+
+  <a-entity id="interface" sound="src: url(audio/nature1.mp3); autoplay: true; loop: true" position="-0.189 2.455 -5">
+        
+        <a-entity id="uitrees" cursor-color visible="false" position="0 1.358 -0.063">
+            <a-image id="itree1" src="#tree1" image-listener position="-1.312 -0.404 0"></a-image>
+            <a-image id="itree2"src="#tree2" image-listener position="0 0 0"></a-image>
+            <a-image id="itree3"src="#tree3" image-listener position="1.312 -0.404 0"></a-image>
+        </a-entity>
+        <a-entity id="uidays" cursor-color visible="false" position="0.186 0.952 -0.063">
+            <a-image id="iday1"src="#day1" image-listener position="-0.470 -0.162 0"></a-image>
+            <a-image id="iday2" src="#day2" image-listener position="0.470 -0.162 0"></a-image>
+        </a-entity>
+        <a-entity id="uiweathers" cursor-color visible="false" position="0 1.225 -0.063">
+            <a-image id="iweather1" src="#weather1" image-listener  position="-1.282 -0.418 0"></a-image>
+            <a-image id="iweather2" src="#weather2" image-listener  position="0 0 0"></a-image>
+
+        </a-entity>
+            
+            <a-entity id="uitree" cursor-color cursor-listener2 position="-0.593 -0.240 -0.857">
+                <a-box id="test"  color="#C66700" scale="1.4 1.4 1.4"></a-box>
+                <a-text scale="1.2 1.2 1.2" position="-0.574 0.014 0.766" value="be nature"></a-text>
+            </a-entity>
+
+            <a-entity id="uiday" cursor-color cursor-listener2  position="1 -0.240 -0.857">
+                 <a-box id="test"  color="#C66700" scale="1.4 1.4 1.4"></a-box>
+                <a-text cursor-listener2 scale="1.2 1.2 1.2" position="-0.459 0.014 0.766"value="be time"></a-text>
+            </a-entity>
+
+            <a-entity id="uiweather" cursor-color cursor-listener2 position="-0.593 -1.798 -0.857">
+                <a-box id="test"  color="#C66700" scale="1.4 1.4 1.4"></a-box>
+                <a-text cursor-listener2 scale="1.2 1.2 1.2" position="-0.679 0.029 0.766" value="be weather"></a-text>
+            </a-entity>
+
+        <a-box move-listener cursor-color id="move"color="#0366d6" position="1 -1.798 -0.857"scale="1.4 1.4 1.4">
+            <a-text scale="0.8 0.8 0.8" position="-0.456 0.037 0.5" value="start \n stop"></a-text>
+        </a-box>
+    </a-entity>
+
+    <a-plane static-body material="src: #ground-img; repeat: 6 6" height="200" width="200" position="0 -0.706 0" rotation="-90 0 0"></a-plane>
+
+      <a-sky src="#daynone-img" theta-length="110" radius="100"></a-sky> 
+    </a-scene>
+
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="javascript/main.js"></script>
+    
+</body>
+</html>

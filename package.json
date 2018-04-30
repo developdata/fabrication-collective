@@ -1,0 +1,17 @@
+{
+  "name": "together",
+  "version": "1.0.0",
+  "description": "an a-frame application using socket.io",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Indira",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "2.5.6",
+    "express": "4.15.2",
+    "router": "1.3.0",
+    "socket.io": "1.7.3"
+  }
+}
